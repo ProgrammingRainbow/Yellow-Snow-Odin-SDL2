@@ -73,16 +73,40 @@ game_cleanup :: proc(g: ^^Game) {
 		mix.HaltChannel(-1)
 		mix.HaltMusic()
 
-		if g^.music != nil {mix.FreeMusic(g^.music)}
-		if g^.collect_sound != nil {mix.FreeChunk(g^.collect_sound)}
-		if g^.hit_sound != nil {mix.FreeChunk(g^.hit_sound)}
+		if g^.music != nil {
+			mix.FreeMusic(g^.music)
+			g^.music = nil
+		}
+		if g^.collect_sound != nil {
+			mix.FreeChunk(g^.collect_sound)
+			g^.collect_sound = nil
+		}
+		if g^.hit_sound != nil {
+			mix.FreeChunk(g^.hit_sound)
+			g^.hit_sound = nil
+		}
 
-		if g^.yellow_image != nil {sdl.DestroyTexture(g^.yellow_image)}
-		if g^.white_image != nil {sdl.DestroyTexture(g^.white_image)}
-		if g^.background_image != nil {sdl.DestroyTexture(g^.background_image)}
+		if g^.yellow_image != nil {
+			sdl.DestroyTexture(g^.yellow_image)
+			g^.yellow_image = nil
+		}
+		if g^.white_image != nil {
+			sdl.DestroyTexture(g^.white_image)
+			g^.white_image = nil
+		}
+		if g^.background_image != nil {
+			sdl.DestroyTexture(g^.background_image)
+			g^.background_image = nil
+		}
 
-		if g^.renderer != nil {sdl.DestroyRenderer(g^.renderer)}
-		if g^.window != nil {sdl.DestroyWindow(g^.window)}
+		if g^.renderer != nil {
+			sdl.DestroyRenderer(g^.renderer)
+			g^.renderer = nil
+		}
+		if g^.window != nil {
+			sdl.DestroyWindow(g^.window)
+			g^.window = nil
+		}
 
 		mix.CloseAudio()
 

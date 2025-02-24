@@ -35,10 +35,19 @@ game_cleanup :: proc(g: ^^Game) {
 	if g^ != nil {
 		player_cleanup(&g^.player)
 
-		if g^.background_image != nil {sdl.DestroyTexture(g^.background_image)}
+		if g^.background_image != nil {
+			sdl.DestroyTexture(g^.background_image)
+			g^.background_image = nil
+		}
 
-		if g^.renderer != nil {sdl.DestroyRenderer(g^.renderer)}
-		if g^.window != nil {sdl.DestroyWindow(g^.window)}
+		if g^.renderer != nil {
+			sdl.DestroyRenderer(g^.renderer)
+			g^.renderer = nil
+		}
+		if g^.window != nil {
+			sdl.DestroyWindow(g^.window)
+			g^.window = nil
+		}
 
 		img.Quit()
 		sdl.Quit()
